@@ -1,4 +1,6 @@
 // import React from 'react'
+import { useState,useEffect,useCallback } from "react";
+import { getData } from "../utils/ApiHelper";
 import Navbar from "../components/Navbar";
 import Herosection from "../components/Carousel";
 import Upcomingtourney from "../components/Upcomingtourney";
@@ -7,35 +9,31 @@ import AthleteCard from "../components/AthleteCard";
 
 function Homepage() {
 
-  const Athletes = [
-    {
-      id: 1,
-      name: "John Doe",
-      sport: "Football",  
-      country: "USA",
-      best_score: "90",
-      image: "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      sport: "Basketball",  
-      country: "Canada",
-      best_score: "80",  
-      image: "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    },
-    {
-      id: 3,
-      name: "Jane Smith",
-      sport: "Basketball",  
-      country: "Canada",
-      best_score: "80",  
-      image: "https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-    }]
+  const [athletes, setAthlete] = useState([]);
+  
+
+  const getAthlete = useCallback(async () => {
+    try {
+      const response = await getData("athletes");
+      setAthlete(response.data.slice(0, 3));
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+
+
+  useEffect(()=>{
+    getAthlete();
+  },[getAthlete]);
+
+  
+
 
   return (
     <div>
       <Navbar/>
+      <div className="h-10"></div>
       <Herosection/>
       <Upcomingtourney />
 
@@ -44,8 +42,8 @@ function Homepage() {
   
      
       <div className="flex flex-wrap justify-evenly gap-4">
-        {Athletes.map((athlete) => (
-          <div key={athlete.id} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 p-4">
+        {athletes.map((athlete) => (
+          <div key={athlete.PlayerId} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 p-4">
             <AthleteCard athlete={athlete} />
           </div>
         ))}

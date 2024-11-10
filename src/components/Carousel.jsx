@@ -19,16 +19,15 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl">
-     
-      <div className="relative">
+    <div className="relative w-11/12 overflow-hidden rounded-3xl mx-auto">
+      <div className="relative flex items-center justify-center">
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
-          className="w-full h-[600px] object-cover rounded-3xl transition-all duration-500"
+          className="w-full h-[450px] object-cover rounded-3xl transition-all duration-500"
         />
-        
-      
+  
+        {/* Prev Button */}
         <button
           onClick={handlePrev}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2">
@@ -41,7 +40,8 @@ const Carousel = () => {
             <path fillRule="evenodd" d="M13.293 3.293a1 1 0 011.414 1.414L8.414 10l6.293 6.293a1 1 0 01-1.414 1.414l-7-7a1 1 0 010-1.414l7-7z" clipRule="evenodd" />
           </svg>
         </button>
-
+  
+        {/* Next Button */}
         <button
           onClick={handleNext}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 rounded-full p-2">
@@ -57,6 +57,7 @@ const Carousel = () => {
       </div>
     </div>
   );
+  
 };
 
 export default Carousel;

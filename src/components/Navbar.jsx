@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"; 
 import logo from '../assets/vite.svg';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const token = localStorage.getItem("token"); 
+  const navigate = useNavigate();
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -41,32 +43,30 @@ const Navbar = () => {
               Tournaments
             </Link>
             <Link
-              to="/events"
+              to="/refrees"
               className="text-gray-800 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
             >
-              Events
+              Refrees
             </Link>
             <Link
               to="/coaches"
               className="text-gray-800 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
             >
-              Coaches/Referees
+              Coaches
             </Link>
-            <Link
-              to="/about"
-              className="text-gray-800 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              About Us
-            </Link>
+            
 
             {/* Admin Button or Become Admin Button */}
             {token ? (
-              <Link
-                to="/admin"
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate("/");
+                }}
                 className="text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium"
               >
-                Admin Dashboard
-              </Link>
+                LogOut
+              </button>
             ) : (
               <Link
                 to="/login"
