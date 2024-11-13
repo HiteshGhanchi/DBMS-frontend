@@ -1,18 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getData } from '../utils/ApiHelper';
 import AthleteCard from '../components/AthleteCard';
-import SearchBar from '../components/SeachBar'; 
+import SearchBar from '../components/SeachBar';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function Athletes() {
   const [athletes, setAthletes] = useState([]);
   const [filteredAthletes, setFilteredAthletes] = useState([]);
-  const [loading, setLoading] = useState(true);  
-  const [error, setError] = useState(null);  
-  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
   
   const [currentPage, setCurrentPage] = useState(1);
-  const [athletesPerPage] = useState(6);  
+  const [athletesPerPage] = useState(6);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const fetchAthletes = useCallback(async () => {
     try {
@@ -29,6 +31,14 @@ function Athletes() {
 
   useEffect(() => {
     fetchAthletes();
+
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
   }, [fetchAthletes]);
 
   const handleSearch = ({ searchTerm, selectedSport, selectedCountry }) => {
@@ -82,9 +92,21 @@ function Athletes() {
   return (
     <>
       <Navbar />
-      <SearchBar onSearch={handleSearch} />
-      
-      <div className="flex flex-wrap justify-evenly gap-4">
+      <div className="flex justify-around items-center px-4 ml-72">
+        <SearchBar onSearch={handleSearch}/>
+
+        {/* Conditionally render the "Add Athlete" button if the user is authenticated */}
+        {isAuthenticated && (
+          <button
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300"
+            onClick={() => {navigate("/athletes/add");}}
+          >
+            Add Athlete
+          </button>
+        )}
+      </div>
+
+      <div className="flex flex-wrap justify-evenly gap-4 mt-6">
         {currentAthletes.map((athlete) => (
           <div key={athlete.PlayerId} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 p-4">
             <AthleteCard athlete={athlete} />
@@ -92,7 +114,7 @@ function Athletes() {
         ))}
       </div>
 
-      <div className="flex justify-center mt-6 text-sm">
+      <div className="flex justify-center mt-16 text-sm">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           className="px-4 py-2 bg-indigo-600 text-white rounded-l-lg disabled:opacity-50"

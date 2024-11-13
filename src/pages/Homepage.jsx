@@ -15,7 +15,7 @@ function Homepage() {
   const getAthlete = useCallback(async () => {
     try {
       const response = await getData("athletes");
-      setAthlete(response.data.slice(0, 3));
+      setAthlete(response?.data.slice(0, 3));
     } catch (error) {
       console.error(error);
     }

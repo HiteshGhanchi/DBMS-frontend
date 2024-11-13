@@ -2,6 +2,7 @@
 import Homepage from "./pages/Homepage"
 import LoginRegister from "./pages/LoginRegister"
 import Athletes from "./pages/Athletes"
+import AddAthletePage from "./pages/AddAthletePage"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginRegister />} />
         <Route path="/athletes" element={<Athletes />}></Route>
+        <Route path="/athletes/add" element={<AddAthletePage />}></Route>
       </Routes>
     </Router>
   )

@@ -13,11 +13,12 @@ const getData = async (url) => {
 
 const postData = async (url,data,flag = false) => {
     try{
+        // console.log(token);
         const response = await axios.post(backend+url,data,{
             headers: {
-                Authorization: `Bearer ${flag ? "" : token}`
+                Authorization: `Bearer ${flag ? token: ""}`
             }
-            });
+        });
         return response
     }catch(error){
         return error;
