@@ -4,6 +4,7 @@ import LoginRegister from "./pages/LoginRegister"
 import Athletes from "./pages/Athletes"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Tournaments from "./pages/Tournaments"
+import AboutUs from "./pages/AboutUs"
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginRegister />} />
         <Route path="/tournaments" element={<Tournaments />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/athletes" element={<Athletes />}></Route>
       </Routes>
     </Router>
