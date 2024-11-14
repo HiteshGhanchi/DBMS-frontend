@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Navbar from '../components/Navbar'; // Reusing the Navbar component
 
 function AboutUs() {
@@ -22,7 +22,7 @@ function AboutUs() {
 
           {/* Short Description */}
           <p className="text-lg text-gray-700 mb-8">
-            We are a passionate team of sports enthusiasts, developers, and innovators. Our mission is to provide the best experience for sports fans by delivering easy access to athletes' and tournaments' data, along with other key sports-related information.
+            We are a passionate team of sports enthusiasts, developers, and innovators. Our mission is to provide the best experience for sports fans by delivering easy access to athletes and tournament data, along with other key sports-related information.
           </p>
           
           {/* Mission Statement */}
@@ -56,8 +56,8 @@ function AboutUs() {
               If you have any questions or would like to know more about our team or our platform, feel free to reach out to us:
             </p>
             <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-              <p className="text-lg font-semibold">Email: <a href="mailto:team@example.com" className="text-indigo-600">team@example.com</a></p>
-              <p className="text-lg">Phone: +1 (123) 456-7890</p>
+              <p className="text-lg font-semibold">Email: <a href="mailto:team@example.com" className="text-indigo-600">hiteshparth@gmail.com</a></p>
+              <p className="text-lg">Phone: +91 (123) 456-7890</p>
             </div>
           </section>
         </section>

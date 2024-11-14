@@ -20,6 +20,7 @@ function Athletes() {
     try {
       const response = await getData('athletes');
       setAthletes(response.data);
+      console.log(response.data);
       setFilteredAthletes(response.data);
       setLoading(false);
     } catch (err) {
@@ -27,7 +28,7 @@ function Athletes() {
       setError('Failed to fetch athletes. Please try again later.');
       setLoading(false);
     }
-  }, []);
+  },[]);
 
   useEffect(() => {
     fetchAthletes();
@@ -95,7 +96,7 @@ function Athletes() {
       <div className="flex justify-around items-center px-4 ml-72">
         <SearchBar onSearch={handleSearch}/>
 
-        {/* Conditionally render the "Add Athlete" button if the user is authenticated */}
+        
         {isAuthenticated && (
           <button
             className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300"

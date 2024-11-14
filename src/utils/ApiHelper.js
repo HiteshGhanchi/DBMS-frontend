@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
 const backend = "http://localhost:5000/api/v1/";
 const getData = async (url) => {
     try{
@@ -12,6 +11,8 @@ const getData = async (url) => {
 }
 
 const postData = async (url,data,flag = false) => {
+    const token = localStorage.getItem("token");
+
     try{
         // console.log(token);
         const response = await axios.post(backend+url,data,{
@@ -26,10 +27,11 @@ const postData = async (url,data,flag = false) => {
 }
 
 const putData = async (url,data,flag = false) => {
+const token = localStorage.getItem("token");
     try{
         const reponse = axios.put(backend+url,data,{
             headers:{
-                Authorization: `Bearer ${flag ? "" : token}`
+                Authorization: `Bearer ${!flag ? "" : token}`
             }
         })
         return reponse
@@ -40,6 +42,8 @@ const putData = async (url,data,flag = false) => {
 }
 
 const deleteData = async (url,flag = false) => {
+const token = localStorage.getItem("token");
+
     try{
         const response = await axios.delete(backend+url,{
             headers: {
